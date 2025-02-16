@@ -261,3 +261,4 @@ airflow-build-dockerfile*
 
 # Ignore zip files https://github.com/apache/airflow/issues/46449
 *.zip
+.direnv
