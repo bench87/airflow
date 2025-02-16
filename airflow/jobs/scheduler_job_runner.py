@@ -454,6 +454,7 @@ class SchedulerJobRunner(BaseJobRunner, LoggingMixin):
                 dag_run_key = (dag_id, task_instance.run_id)
                 current_active_tasks_per_dag_run = concurrency_map.dag_run_active_tasks_map[dag_run_key]
                 dag_max_active_tasks = task_instance.dag_model.max_active_tasks
+                # TODO: add stats
                 self.log.info(
                     "DAG %s has %s/%s running and queued tasks",
                     dag_id,
@@ -1382,7 +1383,7 @@ class SchedulerJobRunner(BaseJobRunner, LoggingMixin):
                 creating_job_id=self.job.id,
                 session=session,
             )
-            Stats.incr("asset.triggered_dagruns")
+            Staks.incr("asset.triggered_dagruns")
             dag_run.consumed_asset_events.extend(asset_events)
             session.execute(delete(AssetDagRunQueue).where(AssetDagRunQueue.target_dag_id == dag_run.dag_id))
 
